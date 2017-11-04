@@ -5,7 +5,12 @@
     xmlns:local="using:NoteBookDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:NoteBookDemo.ViewModels"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -15,9 +20,15 @@
         
         <CommandBar Background="SteelBlue" RequestedTheme="Dark">
             <CommandBar.Content>
-                <TextBlock Margin="12, 8" FontSize="24" Text="My Notebook" />
+                <TextBlock x:Name="titleTextBox" Margin="12, 8" FontSize="24" Text="My Notebook" />
             </CommandBar.Content>
-            <AppBarToggleButton x:Name="toggleButton" Icon="ClosePane" Label="Details" IsChecked="{Binding IsPaneOpen, ElementName=splitView, Mode=TwoWay}"/>
+            <!-- save button-->
+            <AppBarButton x:Name="saveButton1" Icon="Save" Label="Save" Click="{x:Bind ViewModel.Save}"/>
+            <!-- open button-->
+            <AppBarButton x:Name="openButton1" Icon="OpenFile" Label="Open" Click="{x:Bind ViewModel.Open}"/>
+            <!-- details toggle-->
+            <AppBarToggleButton x:Name="toggleButton" Icon="ClosePane" Label="Details" 
+                                IsChecked="{Binding IsPaneOpen, ElementName=splitView, Mode=TwoWay}"/>
         </CommandBar>
         
         <SplitView x:Name="splitView" Grid.Row="1">
@@ -25,7 +36,8 @@
                 <Rectangle Fill="LightSteelBlue" Grid.Row="1"/>
             </SplitView.Pane>
             <SplitView.Content>
-                <TextBox x:Name="textBox" TextWrapping="Wrap" />
+                <TextBox x:Name="textBox" TextWrapping="Wrap" 
+                         Text="{Binding File.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </SplitView.Content>
         </SplitView>
 
