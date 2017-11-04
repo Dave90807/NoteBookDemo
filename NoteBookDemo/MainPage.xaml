@@ -8,6 +8,26 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <CommandBar Background="SteelBlue" RequestedTheme="Dark">
+            <CommandBar.Content>
+                <TextBlock Margin="12, 8" FontSize="24" Text="My Notebook" />
+            </CommandBar.Content>
+            <AppBarToggleButton x:Name="toggleButton" Icon="ClosePane" Label="Details" IsChecked="{Binding IsPaneOpen, ElementName=splitView, Mode=TwoWay}"/>
+        </CommandBar>
+        
+        <SplitView x:Name="splitView" Grid.Row="1">
+            <SplitView.Pane>          
+                <Rectangle Fill="LightSteelBlue" Grid.Row="1"/>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <TextBox x:Name="textBox" TextWrapping="Wrap" />
+            </SplitView.Content>
+        </SplitView>
 
     </Grid>
 </Page>

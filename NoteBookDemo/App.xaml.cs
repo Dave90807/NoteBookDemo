@@ -29,7 +29,7 @@ namespace NoteBookDemo
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            this.Suspending += OnSuspending;  // This is an Event!
         }
 
         /// <summary>
